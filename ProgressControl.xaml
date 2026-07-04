@@ -18,7 +18,7 @@
     <ProgressBar
       Margin="8,8,8,8" Height="32"
       Maximum="100" Minimum="0"
-      Value="50"
+      Value="{Binding ProgressValue, StringFormat=' {0} %'}"
     />
     <TextBlock
       Margin="8,12,8,12"
