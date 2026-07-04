@@ -29,7 +29,11 @@
 
     <StackPanel Grid.Row="1"
       Orientation="Horizontal"
-      HorizontalAlignment="Center">
+      HorizontalAlignment="Center"
+    >
+      <Button Content="Cancel" Width="64" Margin="8,8,8,8" />
+      <Button Content="Pause"  Width="64" Margin="8,8,8,8" />
+      <Button Content="Resume" Width="64" Margin="8,8,8,8" />
     </StackPanel>
 
   </Grid>
