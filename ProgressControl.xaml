@@ -9,4 +9,10 @@
     d:DesignHeight="104" d:DesignWidth="400"
 >
 
+  <ProgressBar
+    Margin="8,8,8,8"
+    Maximum="100" Minimum="0"
+    Value="50"
+  />
+
 </UserControl>
