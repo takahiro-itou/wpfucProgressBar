@@ -53,6 +53,13 @@ public class  ProgressViewModel
 //    Public Properties (Implement Interface).
 //
 
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    public  event PropertyChangedEventHandler?  PropertyChanged;
+
+
 //========================================================================
 //
 //    Protected Member Functions (Pure Virtual Functions).
@@ -62,6 +69,18 @@ public class  ProgressViewModel
 //
 //    Protected Member Functions.
 //
+
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    protected  virtual  void
+    raisePropertyChanged(
+            [CallerMemberName]  System.String?  propertyName = null)
+    {
+        PropertyChanged?.Invoke(
+                this, new PropertyChangedEventArgs(propertyName));
+    }
 
 //========================================================================
 //

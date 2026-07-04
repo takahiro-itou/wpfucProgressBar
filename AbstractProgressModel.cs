@@ -19,9 +19,6 @@ namespace  WpfControl.Utils  {
 //
 //    AbstractProgressViewModel  class.
 //
-//    このクラスは別リポジトリ WpfControlLibrary  にある
-//    Common.SimpleCommand  を利用します
-//
 
 public abstract class  AbstractProgressModel
         : IProgressModel
