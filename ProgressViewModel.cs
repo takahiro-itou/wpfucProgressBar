@@ -45,6 +45,7 @@ public class  ProgressViewModel
     public
     ProgressViewModel()
     {
+        this.m_progress = new Progress<int>(updateProgress);
     }
 
 
@@ -94,6 +95,12 @@ public class  ProgressViewModel
 //    Protected Member Functions.
 //
 
+    protected  virtual  void
+    updateProgress(int progressValue)
+    {
+        this.ProgressValue  = progressValue;
+    }
+
     //----------------------------------------------------------------
     /**
     **
@@ -110,6 +117,11 @@ public class  ProgressViewModel
 //
 //    Member Variables.
 //
+
+    private  readonly   IProgress<int>  m_progress;
+
+    private  int    m_progressValue = 0;
+    private  int    m_resultValue   = 0;
 
 }   //  End class ProgressViewModel
 
