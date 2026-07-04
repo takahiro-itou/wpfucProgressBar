@@ -36,6 +36,19 @@ public  partial class  ProgressControl : UserControl
 //    外部に公開するプロパティ
 //
 
+    //----------------------------------------------------------------
+    /**   ViewModel プロパティ。
+    **
+    **/
+    public  IProgressViewModel?  ViewModel
+    {
+        get { return  this.m_viewModel; }
+        set {
+            this.m_viewModel = value;
+            this.DataContext = value;
+        }
+    }
+
 //========================================================================
 //
 //    外部に公開するイベント
