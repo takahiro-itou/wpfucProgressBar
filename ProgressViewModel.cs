@@ -62,6 +62,30 @@ public class  ProgressViewModel
 
 //========================================================================
 //
+//    Properties.
+//
+
+    public  int
+    ProgressValue
+    {
+        get { return  this.m_progressValue; }
+        set { this.m_progressValue = value;
+              raisePropertyChanged(nameof(ProgressValue));
+        }
+    }
+
+    public  int
+    ResultValue
+    {
+        get { return  this.m_resultValue; }
+        set { this.m_resultValue = value;
+              raisePropertyChanged(nameof(ResultValue));
+        }
+    }
+
+
+//========================================================================
+//
 //    Protected Member Functions (Pure Virtual Functions).
 //
 
