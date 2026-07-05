@@ -69,6 +69,8 @@ public  partial class  ProgressControl : UserControl
 //    Member Variables.
 //
 
+    /**   ビューモデル。    **/
+    private IProgressViewModel?     m_viewModel;
 
 }   //  End class ProgressControl
 
