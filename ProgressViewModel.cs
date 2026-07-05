@@ -74,7 +74,7 @@ public class  ProgressViewModel
     IsCancelable {
         get { return  this.m_isCancelable; }
         set { this.m_isCancelable = value;
-              raisePropertyChanged(nameof(IsCancalable));
+              raisePropertyChanged(nameof(IsCancelable));
        }
     }
 
