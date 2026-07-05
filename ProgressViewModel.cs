@@ -58,6 +58,54 @@ public class  ProgressViewModel
     /**
     **
     **/
+    public  virtual  bool
+    CanPause {
+        get { return  this.m_canPause; }
+        set { this.m_canPause = value;
+              raisePropertyChanged(nameof(CanPause));
+        }
+    }
+
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    public  virtual  bool
+    IsCancelable {
+        get { return  this.m_isCancelable; }
+        set { this.m_isCancelable = value;
+              raisePropertyChanged(nameof(IsCancalable));
+       }
+    }
+
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    public  virtual  bool
+    IsPaused {
+        get { return  this.m_isPaused; }
+        set { this.m_isPaused = value;
+              raisePropertyChanged(nameof(IsPaused));
+       }
+    }
+
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    public  virtual  bool
+    IsRunning {
+        get { return  this.m_isRunning; }
+        set { this.m_isRunning = value;
+              raisePropertyChanged(nameof(IsRunning));
+        }
+    }
+
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
     public  event PropertyChangedEventHandler?  PropertyChanged;
 
 
@@ -122,6 +170,11 @@ public class  ProgressViewModel
 
     private  int    m_progressValue = 0;
     private  int    m_resultValue   = 0;
+
+    private  bool   m_isCancelable  = true;
+    private  bool   m_canPause      = true;
+    private  bool   m_isRunning     = false;
+    private  bool   m_isPaused      = false;
 
 }   //  End class ProgressViewModel
 
