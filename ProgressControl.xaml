@@ -9,9 +9,9 @@
     d:DesignHeight="104" d:DesignWidth="400"
 >
 
-  <Window.Resource>
+  <UserControl.Resources>
     <BooleanToVisibilityConverter x:Key="Bool2Visible" />
-  </Window.Resource>
+  </UserControl.Resources>
 
   <Grid>
     <Grid.RowDefinitions>
