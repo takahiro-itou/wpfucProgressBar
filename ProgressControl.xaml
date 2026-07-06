@@ -9,6 +9,10 @@
     d:DesignHeight="104" d:DesignWidth="400"
 >
 
+  <Window.Resource>
+    <BooleanToVisibilityConverter x:Key="Bool2Visible" />
+  </Window.Resource>
+
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
@@ -31,8 +35,12 @@
       Orientation="Horizontal"
       HorizontalAlignment="Center"
     >
-      <Button Content="Cancel" Width="64" Margin="8,8,8,8" />
-      <Button Content="Pause"  Width="64" Margin="8,8,8,8" />
+      <Button Content="Cancel" Width="64" Margin="8,8,8,8"
+        Visibility="{Binding IsCancelable, Converter={StaticResource Bool2Visible}, Mode=OneWay}"
+      />
+      <Button Content="Pause"  Width="64" Margin="8,8,8,8"
+        Visibility="{Binding CanPause, Converter={StaticResource Bool2Visible}, Mode=OneWay}"
+      />
       <Button Content="Resume" Width="64" Margin="8,8,8,8" />
     </StackPanel>
 
