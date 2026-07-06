@@ -43,7 +43,8 @@ public class  ProgressViewModel
     **
     **/
     public
-    ProgressViewModel()
+    ProgressViewModel(
+            IProgressModel  model)
     {
         this.m_progress = new Progress<int>(updateProgress);
     }
