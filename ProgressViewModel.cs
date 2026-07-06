@@ -83,6 +83,32 @@ public class  ProgressViewModel
     **
     **/
     public  virtual  bool
+    IsPauseEnabled {
+        get {
+            return ( this.m_canPause && this.m_isRunning
+                && (! this.m_isPaused)
+            );
+        }
+    }
+
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    public  virtual  bool
+    IsResumeEnabled {
+        get {
+            return ( this.m_canPause && ! this.m_isRunning
+                && this.m_isPaused
+            );
+        }
+    }
+
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    public  virtual  bool
     IsPaused {
         get { return  this.m_isPaused; }
         set { this.m_isPaused = value;
