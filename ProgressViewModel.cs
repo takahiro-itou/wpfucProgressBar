@@ -47,6 +47,7 @@ public class  ProgressViewModel
             IProgressModel  model)
     {
         this.m_progress = new Progress<int>(updateProgress);
+        model.setProgress(this.m_progress);
     }
 
 

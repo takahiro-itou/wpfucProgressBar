@@ -29,8 +29,7 @@ public abstract class  AbstractProgressModel
     **
     **/
     public
-    AbstractProgressModel(
-        IProgress<int>  progress)
+    AbstractProgressModel()
     {
     }
 
@@ -45,6 +44,18 @@ public abstract class  AbstractProgressModel
 //    Accessors.
 //
 
+    //----------------------------------------------------------------
+    /**   プログレスインスタンスを指定する。
+    **
+    **  @param [in] progress
+    **/
+    public  virtual  void
+    setProgress(IProgress<int>? progress)
+    {
+        this.m_progress = progress;
+    }
+
+
 //========================================================================
 //
 //    Protected Member Functions.
@@ -54,6 +65,9 @@ public abstract class  AbstractProgressModel
 //
 //    Member Variables.
 //
+
+    /**   プログレス。  **/
+    protected   IProgress<int>?     m_progress;
 
 
 }   //  End class AbstractProgressModel

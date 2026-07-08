@@ -33,6 +33,15 @@ public  interface  IProgressModel
 //    Accessors.
 //
 
+    //----------------------------------------------------------------
+    /**   プログレスインスタンスを指定する。
+    **
+    **  @param [in] progress
+    **/
+    public  void
+    setProgress(IProgress<int>  progress);
+
+
 }   //  End interface IProgressModel
 
 }   //  End of namespace  WpfControl.Utils
