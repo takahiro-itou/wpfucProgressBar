@@ -39,7 +39,7 @@
         Visibility="{Binding IsCancelable, Converter={StaticResource Bool2Visible}, Mode=OneWay}"
       />
       <Button Content="Pause"  Width="64" Margin="8,8,8,8"
-        Visibility="{Binding CanPause, Converter={StaticResource Bool2Visible}, Mode=OneWay}"
+        Visibility="{Binding IsPausable, Converter={StaticResource Bool2Visible}, Mode=OneWay}"
       />
       <Button Content="Resume" Width="64" Margin="8,8,8,8" />
     </StackPanel>
