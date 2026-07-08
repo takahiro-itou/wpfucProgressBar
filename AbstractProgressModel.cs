@@ -29,7 +29,8 @@ public abstract class  AbstractProgressModel
     **
     **/
     public
-    AbstractProgressModel()
+    AbstractProgressModel(
+        IProgress<int>  progress)
     {
     }
 
@@ -48,6 +49,12 @@ public abstract class  AbstractProgressModel
 //
 //    Protected Member Functions.
 //
+
+//========================================================================
+//
+//    Member Variables.
+//
+
 
 }   //  End class AbstractProgressModel
 
