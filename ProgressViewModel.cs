@@ -87,7 +87,7 @@ public class  ProgressViewModel
     public  virtual  bool
     IsPauseEnabled {
         get {
-            return ( this.m_canPause && this.m_isRunning
+            return ( this.m_isPausable && this.m_isRunning
                 && (! this.m_isPaused)
             );
         }
@@ -100,7 +100,7 @@ public class  ProgressViewModel
     public  virtual  bool
     IsResumeEnabled {
         get {
-            return ( this.m_canPause && ! this.m_isRunning
+            return ( this.m_isPausable && ! this.m_isRunning
                 && this.m_isPaused
             );
         }
