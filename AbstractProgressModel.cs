@@ -44,7 +44,10 @@ public abstract class  AbstractProgressModel
     **
     **/
     public  virtual  int
-    runTask();
+    runTask()
+    {
+        return ( 0 );
+    }
 
 
 //========================================================================
