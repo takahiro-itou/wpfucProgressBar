@@ -32,7 +32,7 @@ public  interface  IProgressModel
     /**
     **
     **/
-    public  int;
+    public  int
     runTask();
 
 
