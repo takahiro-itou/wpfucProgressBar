@@ -48,6 +48,10 @@ public class  ProgressViewModel
     {
         this.m_progress = new Progress<int>(updateProgress);
         model.setProgress(this.m_progress);
+        this.m_trgModel = model;
+
+        this.m_runTaskCommand = new SimpleCommand(_ => runModelTask());
+        this.m_pauseCommand   = new SimpleCommand(_ => pauseTask());
     }
 
 
@@ -60,10 +64,18 @@ public class  ProgressViewModel
     /**
     **
     **/
+    public  void  pauseTask()
+    {
+    }
+
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
     public  async  void  runModelTask()
     {
         Task<int> task = Task.Run<int>(new Func<int>(
-            m_model.runTask));
+            m_trgModel.runTask));
         int result = await task;
     }
 
@@ -160,6 +172,9 @@ public class  ProgressViewModel
 //    Properties.
 //
 
+    public  ICommand    ModelTaskCommand => m_runTaskCommand;
+    public  ICommand    PauseCommand     => m_pauseCommand;
+
     public  int
     ProgressValue
     {
@@ -213,6 +228,10 @@ public class  ProgressViewModel
 //
 
     private  readonly   IProgress<int>  m_progress;
+    private  readonly   IProgressModel  m_trgModel;
+
+    private  readonly   SimpleCommand   m_runTaskCommand;
+    private  readonly   SimpleCommand   m_pauseCommand;
 
     private  int    m_progressValue = 0;
     private  int    m_resultValue   = 0;
