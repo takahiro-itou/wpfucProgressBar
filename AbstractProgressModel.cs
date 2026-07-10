@@ -50,7 +50,7 @@ public abstract class  AbstractProgressModel
 
         for ( int i = 1; i <= 20; ++ i ) {
             total += i;
-            Thread.Seep(100);
+            Thread.Sleep(100);
         }
 
         return ( total );
