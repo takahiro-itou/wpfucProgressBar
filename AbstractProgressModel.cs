@@ -46,7 +46,14 @@ public abstract class  AbstractProgressModel
     public  virtual  int
     runTask()
     {
-        return ( 0 );
+        int total = 0;
+
+        for ( int i = 1; i <= 20; ++ i ) {
+            total += i;
+            Thread.Seep(100);
+        }
+
+        return ( total );
     }
 
 
