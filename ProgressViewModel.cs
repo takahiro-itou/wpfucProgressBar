@@ -53,6 +53,23 @@ public class  ProgressViewModel
 
 //========================================================================
 //
+//    Public Member Functions.
+//
+
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    public  async  void  runModelTask()
+    {
+        Task<int> task = Task.Run<int>(new Func<int>(
+            m_model.runTask));
+        int result = await task;
+    }
+
+
+//========================================================================
+//
 //    Public Properties (Implement Interface).
 //
 
