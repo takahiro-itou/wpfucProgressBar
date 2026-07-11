@@ -22,8 +22,6 @@ namespace  WpfControl.Utils  {
 
 public abstract class  AbstractProgressModel<TResult, TProgVal>
         : IProgressModel<TResult, TProgVal>
-    where TResult  : System.Numerics.INumber<TResult>
-    where TProgVal : System.Numerics.INumber<TProgVal>
 {
 
     //----------------------------------------------------------------
@@ -45,27 +43,35 @@ public abstract class  AbstractProgressModel<TResult, TProgVal>
     /**
     **
     **/
-    public  virtual  TResult
+    public  abstract  TResult
     runTask(
-        IProgress<TProgVal> progress)
-    {
-        int total = 0;
-
-        progress.Report(1);
-        for ( int i = 1; i <= 20; ++ i ) {
-            total += i;
-            Thread.Sleep(100);
-            progress.Report(i * 5);
-        }
-
-        return ( (TResult)total );
-    }
+        IProgress<TProgVal> progress);
 
 
 //========================================================================
 //
 //    Properties.
 //
+
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    public  TResult
+    CurrentValue {
+        get { return  this.m_curValue; }
+        set { this.m_curValue = value; }
+    }
+
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    public  bool
+    IsPaused {
+        get { return  this.m_isPaused; }
+        set { this.m_isPaused = value; }
+    }
 
 
 //========================================================================
@@ -82,6 +88,10 @@ public abstract class  AbstractProgressModel<TResult, TProgVal>
 //
 //    Member Variables.
 //
+
+    private  TResult    m_curValue;
+
+    private  bool       m_isPaused;
 
 }   //  End class AbstractProgressModel
 
