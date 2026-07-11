@@ -29,10 +29,8 @@ public abstract class  AbstractProgressModel<TResult, TProgVal>
     **
     **/
     public
-    AbstractProgressModel(
-        IProgress<TProgVal> progress)
+    AbstractProgressModel()
     {
-        this.m_progress = progress;
     }
 
 
@@ -46,15 +44,16 @@ public abstract class  AbstractProgressModel<TResult, TProgVal>
     **
     **/
     public  virtual  TResult
-    runTask()
+    runTask(
+        IProgress<TProgVal> progress)
     {
         int total = 0;
 
-        this.m_progress.Report(1);
+        progress.Report(1);
         for ( int i = 1; i <= 20; ++ i ) {
             total += i;
             Thread.Sleep(100);
-            this.m_progress.Report(i * 5);
+            progress.Report(i * 5);
         }
 
         return ( (TResult)total );
@@ -66,22 +65,11 @@ public abstract class  AbstractProgressModel<TResult, TProgVal>
 //    Properties.
 //
 
+
 //========================================================================
 //
 //    Accessors.
 //
-
-    //----------------------------------------------------------------
-    /**   プログレスインスタンスを指定する。
-    **
-    **  @param [in] progress
-    **/
-    public  virtual  void
-    setProgress(IProgress<int>? progress)
-    {
-        this.m_progress = progress;
-    }
-
 
 //========================================================================
 //
@@ -92,10 +80,6 @@ public abstract class  AbstractProgressModel<TResult, TProgVal>
 //
 //    Member Variables.
 //
-
-    /**   プログレス。  **/
-    protected   readonly    IProgress<TProgVal>     m_progress;
-
 
 }   //  End class AbstractProgressModel
 

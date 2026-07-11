@@ -29,8 +29,8 @@ namespace  WpfControl.Utils  {
 //    Common.SimpleCommand  を利用します
 //
 
-public class  ProgressViewModel
-        : INotifyPropertyChanged, IProgressViewModel
+public class  ProgressViewModel<TResult, TProgVal>
+        : INotifyPropertyChanged, IProgressViewModel<TResult, TProgVal>
 {
 
 //========================================================================

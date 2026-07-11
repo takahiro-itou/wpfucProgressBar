@@ -33,7 +33,8 @@ public  interface  IProgressModel<TResult, TProgVal>
     **
     **/
     public  TResult
-    runTask();
+    runTask(
+        IProgress<TProgVal> progress);
 
 
 //========================================================================
