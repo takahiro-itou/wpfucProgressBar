@@ -30,7 +30,7 @@ namespace  WpfControl.Utils  {
 //
 
 public class  ProgressViewModel<TResult, TProgVal>
-        : INotifyPropertyChanged, IProgressViewModel<TResult, TProgVal>
+        : INotifyPropertyChanged, IProgressViewModel
 {
 
 //========================================================================
@@ -44,10 +44,9 @@ public class  ProgressViewModel<TResult, TProgVal>
     **/
     public
     ProgressViewModel(
-            IProgressModel  model)
+            IProgressModel<TResult, TProgVal>   model)
     {
-        this.m_progress = new Progress<int>(updateProgress);
-        model.setProgress(this.m_progress);
+        this.m_progress = new Progress<TProgVal>(updateProgress);
         this.m_trgModel = model;
 
         this.m_runTaskCommand = new SimpleCommand(_ => runModelTask());
@@ -74,9 +73,11 @@ public class  ProgressViewModel<TResult, TProgVal>
     **/
     public  async  void  runModelTask()
     {
-        Task<int> task = Task.Run<int>(new Func<int>(
-            m_trgModel.runTask));
-        int result = await task;
+        //Task<int> task = Task.Run<int>(new Func<int>(
+        //    m_trgModel.runTask));
+        Task<TResult>  task = Task.Run<int>(
+            () => this.m_trgModel.runTask(this.m_progress));
+        TResult  result = await task;
     }
 
 
@@ -175,7 +176,7 @@ public class  ProgressViewModel<TResult, TProgVal>
     public  ICommand    ModelTaskCommand => m_runTaskCommand;
     public  ICommand    PauseCommand     => m_pauseCommand;
 
-    public  int
+    public  TProgVal
     ProgressValue
     {
         get { return  this.m_progressValue; }
@@ -184,7 +185,7 @@ public class  ProgressViewModel<TResult, TProgVal>
         }
     }
 
-    public  int
+    public  TResult
     ResultValue
     {
         get { return  this.m_resultValue; }
@@ -205,7 +206,7 @@ public class  ProgressViewModel<TResult, TProgVal>
 //
 
     protected  virtual  void
-    updateProgress(int progressValue)
+    updateProgress(TProgVal progressValue)
     {
         this.ProgressValue  = progressValue;
     }
@@ -227,8 +228,8 @@ public class  ProgressViewModel<TResult, TProgVal>
 //    Member Variables.
 //
 
-    private  readonly   IProgress<int>  m_progress;
-    private  readonly   IProgressModel  m_trgModel;
+    private  readonly   IProgress<TProgVal>     m_progress;
+    private  readonly   IProgressModel<TResult, TProgVal>   m_trgModel;
 
     private  readonly   SimpleCommand   m_runTaskCommand;
     private  readonly   SimpleCommand   m_pauseCommand;
