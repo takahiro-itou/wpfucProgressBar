@@ -51,9 +51,9 @@ public class  ProgressViewModel<TResult, TProgVal>
 
         this.m_runTaskCommand = new SimpleCommand(_ => runModelTask());
         this.m_pauseCommand   = new SimpleCommand(
-                _ => pauseTask(),  _ => IsPauseEnabled);
+                _ => pauseTask(),  _ => isPauseEnabled() );
         this.m_resumeCommand  = new SimpleCommand(
-                _ => resumeTask(), _ => IsResumeEnabled);
+                _ => resumeTask(), _ => isResumeEnabled());
     }
 
 
