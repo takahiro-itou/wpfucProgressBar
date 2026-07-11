@@ -49,7 +49,8 @@ public class  ProgressViewModel<TResult, TProgVal>
         this.m_progress = new Progress<TProgVal>(updateProgress);
         this.m_trgModel = model;
 
-        this.m_runTaskCommand = new SimpleCommand(_ => runModelTask());
+        this.m_runTaskCommand = new SimpleCommand(
+                _ => runModelTask(), _ => ! IsRunning );
         this.m_pauseCommand   = new SimpleCommand(
                 _ => pauseTask(),  _ => isPauseEnabled() );
         this.m_resumeCommand  = new SimpleCommand(
@@ -178,7 +179,7 @@ public class  ProgressViewModel<TResult, TProgVal>
     **/
     public  virtual  ICommand
     ResumeCommand {
-        get { return  this.m_resumeCommand;
+        get { return  this.m_resumeCommand; }
     }
 
     //----------------------------------------------------------------
@@ -250,6 +251,10 @@ public class  ProgressViewModel<TResult, TProgVal>
     {
         PropertyChanged?.Invoke(
                 this, new PropertyChangedEventArgs(propertyName));
+
+        this.m_runTaskComamnd.RaiseCanExecuteChanged();
+        this.m_pauseCommand.RaiseCanExecuteChanged();
+        this.m_resumeCommand.RaiseCanExecuteCommand();
     }
 
 //========================================================================
