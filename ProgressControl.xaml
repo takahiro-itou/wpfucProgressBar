@@ -40,8 +40,12 @@
       />
       <Button Content="Pause"  Width="64" Margin="8,8,8,8"
         Visibility="{Binding IsPausable, Converter={StaticResource Bool2Visible}, Mode=OneWay}"
+        Command="{Binding PauseTask}"
       />
-      <Button Content="Resume" Width="64" Margin="8,8,8,8" />
+      <Button Content="Resume" Width="64" Margin="8,8,8,8"
+        Visibility="{Binding IsPausable, Converter={StaticResource Bool2Visible}, Mode=OneWay}"
+        Command="{Binding ResumeTask}"
+       />
     </StackPanel>
 
   </Grid>
