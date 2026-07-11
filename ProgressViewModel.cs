@@ -213,6 +213,7 @@ public class  ProgressViewModel<TResult, TProgVal>
     protected  virtual  void
     updateProgress(TProgVal progressValue)
     {
+        this.ResultValue    = this.m_trgModel.CurrentValue;
         this.ProgressValue  = progressValue;
     }
 
