@@ -20,7 +20,7 @@ namespace  WpfControl.Utils  {
 //    IProgressModel  interface.
 //
 
-public  interface  IProgressModel
+public  interface  IProgressModel<TResult, TProgVal>
 {
 
 //========================================================================
@@ -32,7 +32,7 @@ public  interface  IProgressModel
     /**
     **
     **/
-    public  int
+    public  TResult
     runTask();
 
 
@@ -45,14 +45,6 @@ public  interface  IProgressModel
 //
 //    Accessors.
 //
-
-    //----------------------------------------------------------------
-    /**   プログレスインスタンスを指定する。
-    **
-    **  @param [in] progress
-    **/
-    public  void
-    setProgress(IProgress<int>  progress);
 
 
 }   //  End interface IProgressModel

@@ -20,8 +20,8 @@ namespace  WpfControl.Utils  {
 //    AbstractProgressViewModel  class.
 //
 
-public abstract class  AbstractProgressModel
-        : IProgressModel
+public abstract class  AbstractProgressModel<TResult, TProgVal>
+        : IProgressModel<TResult, TProgVal>
 {
 
     //----------------------------------------------------------------
@@ -29,8 +29,10 @@ public abstract class  AbstractProgressModel
     **
     **/
     public
-    AbstractProgressModel()
+    AbstractProgressModel(
+        IProgress<TProgVal> progress)
     {
+        this.m_progress = progress;
     }
 
 
@@ -43,7 +45,7 @@ public abstract class  AbstractProgressModel
     /**
     **
     **/
-    public  virtual  int
+    public  virtual  TResult
     runTask()
     {
         int total = 0;
@@ -55,7 +57,7 @@ public abstract class  AbstractProgressModel
             this.m_progress.Report(i * 5);
         }
 
-        return ( total );
+        return ( (TResult)total );
     }
 
 
@@ -92,7 +94,7 @@ public abstract class  AbstractProgressModel
 //
 
     /**   プログレス。  **/
-    protected   IProgress<int>?     m_progress;
+    protected   readonly    IProgress<TProgVal>     m_progress;
 
 
 }   //  End class AbstractProgressModel
