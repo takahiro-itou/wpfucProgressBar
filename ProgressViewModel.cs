@@ -50,7 +50,10 @@ public class  ProgressViewModel<TResult, TProgVal>
         this.m_trgModel = model;
 
         this.m_runTaskCommand = new SimpleCommand(_ => runModelTask());
-        this.m_pauseCommand   = new SimpleCommand(_ => pauseTask());
+        this.m_pauseCommand   = new SimpleCommand(
+                _ => pauseTask(),  _ => IsPauseEnabled);
+        this.m_resumeCommand  = new SimpleCommand(
+                _ => resumeTask(), _ => IsResumeEnabled);
     }
 
 
@@ -65,6 +68,12 @@ public class  ProgressViewModel<TResult, TProgVal>
     **/
     public  void  pauseTask()
     {
+        this.IsPaused = true;
+    }
+
+    public  void  resumeTask()
+    {
+        this.IsPaused = false;
     }
 
     //----------------------------------------------------------------
@@ -78,6 +87,7 @@ public class  ProgressViewModel<TResult, TProgVal>
         Task<TResult>  task = Task.Run<TResult>(
             () => this.m_trgModel.runTask(this.m_progress));
         TResult  result = await task;
+        this.ResultValue = result;
     }
 
 
@@ -143,9 +153,9 @@ public class  ProgressViewModel<TResult, TProgVal>
     **/
     public  virtual  bool
     IsPaused {
-        get { return  this.m_isPaused; }
-        set { this.m_isPaused = value;
-              raisePropertyChanged(nameof(IsPaused));
+        get { return  this.m_trgModel.IsPaused; }
+        set { this.m_trgModel.IsPaused = value;
+              raisePropertyChanged();
        }
     }
 
@@ -175,6 +185,7 @@ public class  ProgressViewModel<TResult, TProgVal>
 
     public  ICommand    ModelTaskCommand => m_runTaskCommand;
     public  ICommand    PauseCommand     => m_pauseCommand;
+    public  ICommand    ResumeCommand    => m_resumeCommand;
 
     public  TProgVal
     ProgressValue
@@ -233,6 +244,7 @@ public class  ProgressViewModel<TResult, TProgVal>
 
     private  readonly   SimpleCommand   m_runTaskCommand;
     private  readonly   SimpleCommand   m_pauseCommand;
+    private  readonly   SimpleCommand   m_resumeCommand;
 
     private  TProgVal   m_progressValue = default(TProgVal);
     private  TResult    m_resultValue;
