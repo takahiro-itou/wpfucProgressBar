@@ -42,6 +42,21 @@ public  interface  IProgressModel<TResult, TProgVal>
 //    Properties.
 //
 
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    public  TResult
+    CurrentValue { get; set; }
+
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    public  bool
+    IsPaused { get; set; }
+
+
 //========================================================================
 //
 //    Accessors.
