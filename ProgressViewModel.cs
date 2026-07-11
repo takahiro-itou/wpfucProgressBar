@@ -146,6 +146,42 @@ public class  ProgressViewModel<TResult, TProgVal>
     }
 
     //----------------------------------------------------------------
+    /**   タスクを実行するコマンドを取得するプロパティ
+    **
+    **/
+    public  virtual  ICommand
+    ModelTaskCommand {
+        get { return  this.m_runTaskCommand; }
+    }
+
+    //----------------------------------------------------------------
+    /**   ポーズ用のコマンドを取得するプロパティ
+    **
+    **/
+    public  virtual  ICommand
+    PauseCommand {
+        get { return  this.m_pauseCommand; }
+    }
+
+    public  virtual  TProgVal
+    ProgressValue
+    {
+        get { return  this.m_progressValue; }
+        set { this.m_progressValue = value;
+              raisePropertyChanged(nameof(ProgressValue));
+        }
+    }
+
+    //----------------------------------------------------------------
+    /**   リジューム用のコマンドを取得するプロパティ
+    **
+    **/
+    public  virtual  ICommand
+    ResumeCommand {
+        get { return  this.m_resumeCommand;
+    }
+
+    //----------------------------------------------------------------
     /**
     **
     **/
@@ -156,19 +192,6 @@ public class  ProgressViewModel<TResult, TProgVal>
 //
 //    Properties.
 //
-
-    public  ICommand    ModelTaskCommand => m_runTaskCommand;
-    public  ICommand    PauseCommand     => m_pauseCommand;
-    public  ICommand    ResumeCommand    => m_resumeCommand;
-
-    public  TProgVal
-    ProgressValue
-    {
-        get { return  this.m_progressValue; }
-        set { this.m_progressValue = value;
-              raisePropertyChanged(nameof(ProgressValue));
-        }
-    }
 
     public  TResult
     ResultValue
