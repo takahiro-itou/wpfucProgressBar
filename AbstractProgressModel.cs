@@ -21,6 +21,8 @@ namespace  WpfControl.Utils  {
 //
 
 public abstract class  AbstractProgressModel<TResult, TProgVal>
+            where TResult  : INumber<TResult>
+            where TProgVal : INumber<TProgVal>
         : IProgressModel<TResult, TProgVal>
 {
 
