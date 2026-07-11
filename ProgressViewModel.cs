@@ -126,32 +126,6 @@ public class  ProgressViewModel<TResult, TProgVal>
     **
     **/
     public  virtual  bool
-    IsPauseEnabled {
-        get {
-            return ( this.m_isPausable && this.m_isRunning
-                && (! this.m_isPaused)
-            );
-        }
-    }
-
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    public  virtual  bool
-    IsResumeEnabled {
-        get {
-            return ( this.m_isPausable && ! this.m_isRunning
-                && this.m_isPaused
-            );
-        }
-    }
-
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    public  virtual  bool
     IsPaused {
         get { return  this.m_trgModel.IsPaused; }
         set { this.m_trgModel.IsPaused = value;
@@ -216,6 +190,26 @@ public class  ProgressViewModel<TResult, TProgVal>
 //    Protected Member Functions.
 //
 
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    protected  virtual  bool
+    isPauseEnabled()
+    {
+        return ( this.IsPausable && this.IsRunning && (! IsPaused) );
+    }
+
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    protected  virtual  bool
+    isResumeEnabled()
+    {
+        return ( this.IsPausable && this.IsRunning && IsPaused );
+    }
+
     protected  virtual  void
     updateProgress(TProgVal progressValue)
     {
@@ -249,7 +243,7 @@ public class  ProgressViewModel<TResult, TProgVal>
     private  TProgVal   m_progressValue = default(TProgVal);
     private  TResult    m_resultValue;
 
-    private  bool   m_isCancelable  = true;
+    private  bool   m_isCancelable  = false;
     private  bool   m_isPausable    = true;
     private  bool   m_isRunning     = false;
     private  bool   m_isPaused      = false;
