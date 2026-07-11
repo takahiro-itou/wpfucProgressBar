@@ -164,15 +164,6 @@ public class  ProgressViewModel<TResult, TProgVal>
         get { return  this.m_pauseCommand; }
     }
 
-    public  virtual  TProgVal
-    ProgressValue
-    {
-        get { return  this.m_progressValue; }
-        set { this.m_progressValue = value;
-              raisePropertyChanged(nameof(ProgressValue));
-        }
-    }
-
     //----------------------------------------------------------------
     /**   リジューム用のコマンドを取得するプロパティ
     **
@@ -194,6 +185,23 @@ public class  ProgressViewModel<TResult, TProgVal>
 //    Properties.
 //
 
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    public  virtual  TProgVal
+    ProgressValue
+    {
+        get { return  this.m_progressValue; }
+        set { this.m_progressValue = value;
+              raisePropertyChanged();
+        }
+    }
+
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
     public  TResult
     ResultValue
     {

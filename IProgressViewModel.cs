@@ -53,9 +53,6 @@ public  interface  IProgressViewModel
     public  ICommand
     PauseCommand { get; }
 
-    public  TProgVal
-    ProgressValue { get; set; }
-
     //----------------------------------------------------------------
     /**   リジューム用のコマンドを取得するプロパティ
     **
