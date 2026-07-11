@@ -48,9 +48,11 @@ public abstract class  AbstractProgressModel
     {
         int total = 0;
 
+        this.m_progress.Report(1);
         for ( int i = 1; i <= 20; ++ i ) {
             total += i;
             Thread.Sleep(100);
+            this.m_progress.Report(i * 5);
         }
 
         return ( total );
