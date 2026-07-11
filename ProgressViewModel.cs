@@ -75,7 +75,7 @@ public class  ProgressViewModel<TResult, TProgVal>
     {
         //Task<int> task = Task.Run<int>(new Func<int>(
         //    m_trgModel.runTask));
-        Task<TResult>  task = Task.Run<int>(
+        Task<TResult>  task = Task.Run<TResult>(
             () => this.m_trgModel.runTask(this.m_progress));
         TResult  result = await task;
     }
@@ -234,8 +234,8 @@ public class  ProgressViewModel<TResult, TProgVal>
     private  readonly   SimpleCommand   m_runTaskCommand;
     private  readonly   SimpleCommand   m_pauseCommand;
 
-    private  int    m_progressValue = 0;
-    private  int    m_resultValue   = 0;
+    private  TProgVal   m_progressValue = default(TProgVal);
+    private  TResult    m_resultValue;
 
     private  bool   m_isCancelable  = true;
     private  bool   m_isPausable    = true;
