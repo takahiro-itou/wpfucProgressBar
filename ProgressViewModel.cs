@@ -82,11 +82,11 @@ public class  ProgressViewModel<TResult, TProgVal>
     **/
     public  async  void  runModelTask()
     {
-        //Task<int> task = Task.Run<int>(new Func<int>(
-        //    m_trgModel.runTask));
+        this.IsRunning = true;
         Task<TResult>  task = Task.Run<TResult>(
             () => this.m_trgModel.runTask(this.m_progress));
         TResult  result = await task;
+        this.IsRunning = false;
         this.ResultValue = result;
     }
 
@@ -141,7 +141,7 @@ public class  ProgressViewModel<TResult, TProgVal>
     IsRunning {
         get { return  this.m_isRunning; }
         set { this.m_isRunning = value;
-              raisePropertyChanged(nameof(IsRunning));
+              raisePropertyChanged();
         }
     }
 
