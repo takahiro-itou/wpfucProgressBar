@@ -20,8 +20,8 @@ namespace  WpfControl.Utils  {
 //    AbstractProgressViewModel  class.
 //
 
-public abstract class  AbstractProgressModel
-        : IProgressModel
+public abstract class  AbstractProgressModel<TResult, TProgVal>
+        : IProgressModel<TResult, TProgVal>
 {
 
     //----------------------------------------------------------------
@@ -36,8 +36,43 @@ public abstract class  AbstractProgressModel
 
 //========================================================================
 //
+//    Public Member Functions.
+//
+
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    public  abstract  TResult
+    runTask(
+        IProgress<TProgVal> progress);
+
+
+//========================================================================
+//
 //    Properties.
 //
+
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    public  TResult
+    CurrentValue {
+        get { return  this.m_curValue; }
+        set { this.m_curValue = value; }
+    }
+
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    public  bool
+    IsPaused {
+        get { return  this.m_isPaused; }
+        set { this.m_isPaused = value; }
+    }
+
 
 //========================================================================
 //
@@ -48,6 +83,15 @@ public abstract class  AbstractProgressModel
 //
 //    Protected Member Functions.
 //
+
+//========================================================================
+//
+//    Member Variables.
+//
+
+    private  TResult    m_curValue;
+
+    private  bool       m_isPaused;
 
 }   //  End class AbstractProgressModel
 

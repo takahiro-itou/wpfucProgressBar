@@ -20,18 +20,48 @@ namespace  WpfControl.Utils  {
 //    IProgressModel  interface.
 //
 
-public  interface  IProgressModel
+public  interface  IProgressModel<TResult, TProgVal>
 {
+
+//========================================================================
+//
+//    Public Member Functions.
+//
+
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    public  TResult
+    runTask(
+        IProgress<TProgVal> progress);
+
 
 //========================================================================
 //
 //    Properties.
 //
 
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    public  TResult
+    CurrentValue { get; set; }
+
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    public  bool
+    IsPaused { get; set; }
+
+
 //========================================================================
 //
 //    Accessors.
 //
+
 
 }   //  End interface IProgressModel
 
