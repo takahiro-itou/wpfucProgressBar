@@ -261,6 +261,16 @@ public class  ProgressViewModel<TResult, TProgVal>
     {
         PropertyChanged?.Invoke(
                 this, new PropertyChangedEventArgs(propertyName));
+        raiseCanExecuteChanged();
+    }
+
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    protected  virtual  void
+    raiseCanExecuteChanged()
+    {
 
         this.m_runTaskCommand.RaiseCanExecuteChanged();
         this.m_pauseCommand.RaiseCanExecuteChanged();
