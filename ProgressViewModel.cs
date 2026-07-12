@@ -106,8 +106,10 @@ public class  ProgressViewModel<TResult, TProgVal>
     public  virtual  bool
     IsCancelable {
         get { return  this.m_isCancelable; }
-        set { this.m_isCancelable = value;
-              raisePropertyChanged(nameof(IsCancelable));
+        set {
+            this.m_isCancelable = value;
+            raisePropertyChanged();
+            raiseCanExecuteChanged();
        }
     }
 
@@ -119,8 +121,10 @@ public class  ProgressViewModel<TResult, TProgVal>
     public  virtual  bool
     IsPausable {
         get { return  this.m_isPausable; }
-        set { this.m_isPausable = value;
-              raisePropertyChanged(nameof(IsPausable));
+        set {
+            this.m_isPausable = value;
+            raisePropertyChanged();
+            raiseCanExecuteChanged();
         }
     }
 
@@ -131,8 +135,10 @@ public class  ProgressViewModel<TResult, TProgVal>
     public  virtual  bool
     IsPaused {
         get { return  this.m_trgModel.IsPaused; }
-        set { this.m_trgModel.IsPaused = value;
-              raisePropertyChanged();
+        set {
+            this.m_trgModel.IsPaused = value;
+            raisePropertyChanged();
+            raiseCanExecuteChanged();
        }
     }
 
@@ -143,8 +149,10 @@ public class  ProgressViewModel<TResult, TProgVal>
     public  virtual  bool
     IsRunning {
         get { return  this.m_isRunning; }
-        set { this.m_isRunning = value;
-              raisePropertyChanged();
+        protected set {
+            this.m_isRunning = value;
+            raisePropertyChanged();
+            raiseCanExecuteChanged();
         }
     }
 
@@ -209,7 +217,7 @@ public class  ProgressViewModel<TResult, TProgVal>
     {
         get { return  this.m_resultValue; }
         set { this.m_resultValue = value;
-              raisePropertyChanged(nameof(ResultValue));
+              raisePropertyChanged();
         }
     }
 
@@ -244,11 +252,17 @@ public class  ProgressViewModel<TResult, TProgVal>
         return ( this.IsPausable && this.IsRunning && IsPaused );
     }
 
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
     protected  virtual  void
-    updateProgress(TProgVal progressValue)
+    raiseCanExecuteChanged()
     {
-        this.ResultValue    = this.m_trgModel.CurrentValue;
-        this.ProgressValue  = progressValue;
+
+        this.m_runTaskCommand.RaiseCanExecuteChanged();
+        this.m_pauseCommand.RaiseCanExecuteChanged();
+        this.m_resumeCommand.RaiseCanExecuteChanged();
     }
 
     //----------------------------------------------------------------
@@ -269,13 +283,12 @@ public class  ProgressViewModel<TResult, TProgVal>
     **
     **/
     protected  virtual  void
-    raiseCanExecuteChanged()
+    updateProgress(TProgVal progressValue)
     {
-
-        this.m_runTaskCommand.RaiseCanExecuteChanged();
-        this.m_pauseCommand.RaiseCanExecuteChanged();
-        this.m_resumeCommand.RaiseCanExecuteChanged();
+        this.ResultValue    = this.m_trgModel.CurrentValue;
+        this.ProgressValue  = progressValue;
     }
+
 
 //========================================================================
 //
