@@ -31,7 +31,8 @@ namespace  WpfControl.Utils  {
 
 public class  ProgressViewModel<TResult, TProgVal>
         : INotifyPropertyChanged, IProgressViewModel
-    where TResult : struct
+    where TResult  : struct
+    where TProgVal : struct
 {
 
 //========================================================================
