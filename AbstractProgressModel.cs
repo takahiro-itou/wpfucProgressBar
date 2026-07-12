@@ -22,6 +22,7 @@ namespace  WpfControl.Utils  {
 
 public abstract class  AbstractProgressModel<TResult, TProgVal>
         : IProgressModel<TResult, TProgVal>
+    where TResult : struct
 {
 
     //----------------------------------------------------------------
