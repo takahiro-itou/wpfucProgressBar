@@ -283,7 +283,6 @@ public class  ProgressViewModel<TResult, TProgVal>
     private  bool   m_isCancelable  = false;
     private  bool   m_isPausable    = true;
     private  bool   m_isRunning     = false;
-    private  bool   m_isPaused      = false;
 
 }   //  End class ProgressViewModel
 
