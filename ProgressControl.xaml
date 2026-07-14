@@ -9,6 +9,10 @@
     d:DesignHeight="104" d:DesignWidth="400"
 >
 
+  <UserControl.Resources>
+    <BooleanToVisibilityConverter x:Key="Bool2Visible" />
+  </UserControl.Resources>
+
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
@@ -18,22 +22,30 @@
     <ProgressBar
       Margin="8,8,8,8" Height="32"
       Maximum="100" Minimum="0"
-      Value="50"
+      Value="{Binding ProgressValue}"
     />
     <TextBlock
       Margin="8,12,8,12"
       HorizontalAlignment="Center"
       VerticalAlignment="Center"
-      Text="0 %"
+      Text="{Binding ProgressValue, StringFormat=' {0} %'}"
     />
 
     <StackPanel Grid.Row="1"
       Orientation="Horizontal"
       HorizontalAlignment="Center"
     >
-      <Button Content="Cancel" Width="64" Margin="8,8,8,8" />
-      <Button Content="Pause"  Width="64" Margin="8,8,8,8" />
-      <Button Content="Resume" Width="64" Margin="8,8,8,8" />
+      <Button Content="Cancel" Width="64" Margin="8,8,8,8"
+        Visibility="{Binding IsCancelable, Converter={StaticResource Bool2Visible}, Mode=OneWay}"
+      />
+      <Button Content="Pause"  Width="64" Margin="8,8,8,8"
+        Visibility="{Binding IsPausable, Converter={StaticResource Bool2Visible}, Mode=OneWay}"
+        Command="{Binding PauseCommand}"
+      />
+      <Button Content="Resume" Width="64" Margin="8,8,8,8"
+        Visibility="{Binding IsPausable, Converter={StaticResource Bool2Visible}, Mode=OneWay}"
+        Command="{Binding ResumeCommand}"
+       />
     </StackPanel>
 
   </Grid>

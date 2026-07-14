@@ -25,6 +25,42 @@ namespace  WpfControl.Utils  {
 public  interface  IProgressViewModel
 {
 
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    public  bool
+    IsCancelable { get; set; }
+
+    //----------------------------------------------------------------
+    /**
+    **
+    **/
+    public  bool
+    IsPausable { get; set; }
+
+    //----------------------------------------------------------------
+    /**   タスクを実行するコマンドを取得するプロパティ
+    **
+    **/
+    public  ICommand
+    ModelTaskCommand { get; }
+
+    //----------------------------------------------------------------
+    /**   ポーズ用のコマンドを取得するプロパティ
+    **
+    **/
+    public  ICommand
+    PauseCommand { get; }
+
+    //----------------------------------------------------------------
+    /**   リジューム用のコマンドを取得するプロパティ
+    **
+    **/
+    public  ICommand
+    ResumeCommand { get; }
+
+
 }   //  End interface IProgressViewModel
 
 }   //  End of namespace  WpfControl.Utils
