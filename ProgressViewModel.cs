@@ -1,4 +1,4 @@
-﻿//  -*-  coding: utf-8-with-signature-unix;        -*-  //
+﻿//  -*-  coding: utf-8-with-signature  -*-  //
 /*************************************************************************
 **                                                                      **
 **                  ---  WPF UserControl Library.  ---                  **
@@ -40,24 +40,24 @@ public class  ProgressViewModel<TResult, TProgVal>
 //    Constructor(s) and Destructor.
 //
 
-    //----------------------------------------------------------------
-    /**   コンストラクタ。
-    **
-    **/
-    public
-    ProgressViewModel(
-            IProgressModel<TResult, TProgVal>   model)
-    {
-        this.m_progress = new Progress<TProgVal>(updateProgress);
-        this.m_trgModel = model;
+//----------------------------------------------------------------
+/**   コンストラクタ。
+**
+**/
+public
+ProgressViewModel(
+        IProgressModel<TResult, TProgVal>   model)
+{
+    this.m_progress = new Progress<TProgVal>(updateProgress);
+    this.m_trgModel = model;
 
-        this.m_runTaskCommand = new SimpleCommand(
-                _ => runModelTask(), _ => ! IsRunning );
-        this.m_pauseCommand   = new SimpleCommand(
-                _ => pauseTask(),  _ => isPauseEnabled() );
-        this.m_resumeCommand  = new SimpleCommand(
-                _ => resumeTask(), _ => isResumeEnabled());
-    }
+    this.m_runTaskCommand = new SimpleCommand(
+            _ => runModelTask(), _ => ! IsRunning );
+    this.m_pauseCommand   = new SimpleCommand(
+            _ => pauseTask(),  _ => isPauseEnabled() );
+    this.m_resumeCommand  = new SimpleCommand(
+            _ => resumeTask(), _ => isResumeEnabled());
+}
 
 
 //========================================================================
@@ -65,33 +65,36 @@ public class  ProgressViewModel<TResult, TProgVal>
 //    Public Member Functions.
 //
 
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    public  void  pauseTask()
-    {
-        this.IsPaused = true;
-    }
+//----------------------------------------------------------------
+/**
+**
+**/
+public  void
+pauseTask()
+{
+    this.IsPaused = true;
+}
 
-    public  void  resumeTask()
-    {
-        this.IsPaused = false;
-    }
+public  void
+resumeTask()
+{
+    this.IsPaused = false;
+}
 
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    public  async  void  runModelTask()
-    {
-        this.IsRunning = true;
-        Task<TResult>  task = Task.Run<TResult>(
-            () => this.m_trgModel.runTask(this.m_progress));
-        TResult  result = await task;
-        this.IsRunning = false;
-        this.ResultValue = result;
-    }
+//----------------------------------------------------------------
+/**
+**
+**/
+public  async  void
+runModelTask()
+{
+    this.IsRunning = true;
+    Task<TResult>  task = Task.Run<TResult>(
+        () => this.m_trgModel.runTask(this.m_progress));
+    TResult  result = await task;
+    this.IsRunning = false;
+    this.ResultValue = result;
+}
 
 
 //========================================================================
@@ -99,95 +102,94 @@ public class  ProgressViewModel<TResult, TProgVal>
 //    Public Properties (Implement Interface).
 //
 
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    public  virtual  bool
-    IsCancelable {
-        get { return  this.m_isCancelable; }
-        set {
-            this.m_isCancelable = value;
-            raisePropertyChanged();
-            raiseCanExecuteChanged();
-       }
+//----------------------------------------------------------------
+/**
+**
+**/
+public  virtual  bool
+IsCancelable {
+    get { return  this.m_isCancelable; }
+    set {
+        this.m_isCancelable = value;
+        raisePropertyChanged();
+        raiseCanExecuteChanged();
     }
+}
 
-
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    public  virtual  bool
-    IsPausable {
-        get { return  this.m_isPausable; }
-        set {
-            this.m_isPausable = value;
-            raisePropertyChanged();
-            raiseCanExecuteChanged();
-        }
+//----------------------------------------------------------------
+/**
+**
+**/
+public  virtual  bool
+IsPausable {
+    get { return  this.m_isPausable; }
+    set {
+        this.m_isPausable = value;
+        raisePropertyChanged();
+        raiseCanExecuteChanged();
     }
+}
 
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    public  virtual  bool
-    IsPaused {
-        get { return  this.m_trgModel.IsPaused; }
-        set {
-            this.m_trgModel.IsPaused = value;
-            raisePropertyChanged();
-            raiseCanExecuteChanged();
-       }
+//----------------------------------------------------------------
+/**
+**
+**/
+public  virtual  bool
+IsPaused {
+    get { return  this.m_trgModel.IsPaused; }
+    set {
+        this.m_trgModel.IsPaused = value;
+        raisePropertyChanged();
+        raiseCanExecuteChanged();
     }
+}
 
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    public  virtual  bool
-    IsRunning {
-        get { return  this.m_isRunning; }
-        protected set {
-            this.m_isRunning = value;
-            raisePropertyChanged();
-            raiseCanExecuteChanged();
-        }
+//----------------------------------------------------------------
+/**
+**
+**/
+public  virtual  bool
+IsRunning {
+    get { return  this.m_isRunning; }
+    protected set {
+        this.m_isRunning = value;
+        raisePropertyChanged();
+        raiseCanExecuteChanged();
     }
+}
 
-    //----------------------------------------------------------------
-    /**   タスクを実行するコマンドを取得するプロパティ
-    **
-    **/
-    public  virtual  ICommand
-    ModelTaskCommand {
-        get { return  this.m_runTaskCommand; }
-    }
+//----------------------------------------------------------------
+/**   タスクを実行するコマンドを取得するプロパティ
+**
+**/
+public  virtual  ICommand
+ModelTaskCommand {
+    get { return  this.m_runTaskCommand; }
+}
 
-    //----------------------------------------------------------------
-    /**   ポーズ用のコマンドを取得するプロパティ
-    **
-    **/
-    public  virtual  ICommand
-    PauseCommand {
-        get { return  this.m_pauseCommand; }
-    }
+//----------------------------------------------------------------
+/**   ポーズ用のコマンドを取得するプロパティ
+**
+**/
+public  virtual  ICommand
+PauseCommand {
+    get { return  this.m_pauseCommand; }
+}
 
-    //----------------------------------------------------------------
-    /**   リジューム用のコマンドを取得するプロパティ
-    **
-    **/
-    public  virtual  ICommand
-    ResumeCommand {
-        get { return  this.m_resumeCommand; }
-    }
+//----------------------------------------------------------------
+/**   リジューム用のコマンドを取得するプロパティ
+**
+**/
+public  virtual  ICommand
+ResumeCommand {
+    get { return  this.m_resumeCommand; }
+}
 
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    public  event PropertyChangedEventHandler?  PropertyChanged;
+//----------------------------------------------------------------
+/**
+**
+**/
+public  event PropertyChangedEventHandler?  PropertyChanged;
 
 
 //========================================================================
@@ -195,31 +197,31 @@ public class  ProgressViewModel<TResult, TProgVal>
 //    Properties.
 //
 
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    public  virtual  TProgVal
-    ProgressValue
-    {
-        get { return  this.m_progressValue; }
-        set { this.m_progressValue = value;
-              raisePropertyChanged();
-        }
+//----------------------------------------------------------------
+/**
+**
+**/
+public  virtual  TProgVal
+ProgressValue
+{
+    get { return  this.m_progressValue; }
+    set { this.m_progressValue = value;
+          raisePropertyChanged();
     }
+}
 
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    public  TResult
-    ResultValue
-    {
-        get { return  this.m_resultValue; }
-        set { this.m_resultValue = value;
-              raisePropertyChanged();
-        }
+//----------------------------------------------------------------
+/**
+**
+**/
+public  TResult
+ResultValue
+{
+    get { return  this.m_resultValue; }
+    set { this.m_resultValue = value;
+          raisePropertyChanged();
     }
+}
 
 
 //========================================================================
@@ -232,62 +234,61 @@ public class  ProgressViewModel<TResult, TProgVal>
 //    Protected Member Functions.
 //
 
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    protected  virtual  bool
-    isPauseEnabled()
-    {
-        return ( this.IsPausable && this.IsRunning && (! IsPaused) );
-    }
+//----------------------------------------------------------------
+/**
+**
+**/
+protected  virtual  bool
+isPauseEnabled()
+{
+    return ( this.IsPausable && this.IsRunning && (! IsPaused) );
+}
 
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    protected  virtual  bool
-    isResumeEnabled()
-    {
-        return ( this.IsPausable && this.IsRunning && IsPaused );
-    }
+//----------------------------------------------------------------
+/**
+**
+**/
+protected  virtual  bool
+isResumeEnabled()
+{
+    return ( this.IsPausable && this.IsRunning && IsPaused );
+}
 
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    protected  virtual  void
-    raiseCanExecuteChanged()
-    {
+//----------------------------------------------------------------
+/**
+**
+**/
+protected  virtual  void
+raiseCanExecuteChanged()
+{
+    this.m_runTaskCommand.RaiseCanExecuteChanged();
+    this.m_pauseCommand.RaiseCanExecuteChanged();
+    this.m_resumeCommand.RaiseCanExecuteChanged();
+}
 
-        this.m_runTaskCommand.RaiseCanExecuteChanged();
-        this.m_pauseCommand.RaiseCanExecuteChanged();
-        this.m_resumeCommand.RaiseCanExecuteChanged();
-    }
+//----------------------------------------------------------------
+/**
+**
+**/
+protected  virtual  void
+raisePropertyChanged(
+        [CallerMemberName]  System.String?  propertyName = null)
+{
+    PropertyChanged?.Invoke(
+            this, new PropertyChangedEventArgs(propertyName));
+    raiseCanExecuteChanged();
+}
 
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    protected  virtual  void
-    raisePropertyChanged(
-            [CallerMemberName]  System.String?  propertyName = null)
-    {
-        PropertyChanged?.Invoke(
-                this, new PropertyChangedEventArgs(propertyName));
-        raiseCanExecuteChanged();
-    }
-
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    protected  virtual  void
-    updateProgress(TProgVal progressValue)
-    {
-        this.ResultValue    = this.m_trgModel.CurrentValue;
-        this.ProgressValue  = progressValue;
-    }
+//----------------------------------------------------------------
+/**
+**
+**/
+protected  virtual  void
+updateProgress(TProgVal progressValue)
+{
+    this.ResultValue    = this.m_trgModel.CurrentValue;
+    this.ProgressValue  = progressValue;
+}
 
 
 //========================================================================
@@ -295,19 +296,19 @@ public class  ProgressViewModel<TResult, TProgVal>
 //    Member Variables.
 //
 
-    private  readonly   IProgress<TProgVal>     m_progress;
-    private  readonly   IProgressModel<TResult, TProgVal>   m_trgModel;
+private  readonly   IProgress<TProgVal>     m_progress;
+private  readonly   IProgressModel<TResult, TProgVal>   m_trgModel;
 
-    private  readonly   SimpleCommand   m_runTaskCommand;
-    private  readonly   SimpleCommand   m_pauseCommand;
-    private  readonly   SimpleCommand   m_resumeCommand;
+private  readonly   SimpleCommand<int>  m_runTaskCommand;
+private  readonly   SimpleCommand<int>  m_pauseCommand;
+private  readonly   SimpleCommand<int>  m_resumeCommand;
 
-    private  TProgVal   m_progressValue = default(TProgVal);
-    private  TResult    m_resultValue;
+private  TProgVal   m_progressValue = default(TProgVal);
+private  TResult    m_resultValue;
 
-    private  bool   m_isCancelable  = false;
-    private  bool   m_isPausable    = true;
-    private  bool   m_isRunning     = false;
+private  bool       m_isCancelable  = false;
+private  bool       m_isPausable    = true;
+private  bool       m_isRunning     = false;
 
 }   //  End class ProgressViewModel
 
