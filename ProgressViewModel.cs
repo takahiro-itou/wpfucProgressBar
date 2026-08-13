@@ -52,7 +52,7 @@ ProgressViewModel(
     this.m_trgModel = model;
 
     this.m_runTaskCommand = new SimpleCommand<int>(
-            param_ => runModelTask(param), _ => ! IsRunning );
+            param => runModelTask(param), _ => ! IsRunning );
     this.m_pauseCommand   = new SimpleCommand<int>(
             param => pauseTask(param),  _ => isPauseEnabled() );
     this.m_resumeCommand  = new SimpleCommand<int>(
@@ -72,12 +72,16 @@ ProgressViewModel(
 public  async  void
 pauseTask(int param)
 {
+    await  System.Threading.Tasks.Task.Delay(param);
+
     this.IsPaused = true;
 }
 
 public  async  void
 resumeTask(int param)
 {
+    await  System.Threading.Tasks.Task.Delay(param);
+
     this.IsPaused = false;
 }
 
@@ -89,9 +93,12 @@ public  async  void
 runModelTask(int param)
 {
     this.IsRunning = true;
+    await  System.Threading.Tasks.Task.Delay(param);
+
     Task<TResult>  task = Task.Run<TResult>(
         () => this.m_trgModel.runTask(this.m_progress));
     TResult  result = await task;
+
     this.IsRunning = false;
     this.ResultValue = result;
 }
