@@ -268,9 +268,9 @@ isResumeEnabled()
 protected  virtual  void
 raiseCanExecuteChanged()
 {
-    this.m_runTaskCommand.RaiseCanExecuteChanged();
-    this.m_pauseCommand.RaiseCanExecuteChanged();
-    this.m_resumeCommand.RaiseCanExecuteChanged();
+    this.m_runTaskCommand.raiseCanExecuteChanged();
+    this.m_pauseCommand  .raiseCanExecuteChanged();
+    this.m_resumeCommand .raiseCanExecuteChanged();
 }
 
 //----------------------------------------------------------------
