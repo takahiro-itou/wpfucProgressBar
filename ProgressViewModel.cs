@@ -31,7 +31,7 @@ namespace  WpfControl.Utils  {
 //
 
 public  class  ProgressViewModel<TResult, TProgVal>
-        : INotifyPropertyChanged, IProgressViewModel
+        : ViewModelBase, IProgressViewModel
     where TResult  : struct
     where TProgVal : struct
 {
@@ -114,13 +114,13 @@ runModelTask(int param)
 /**
 **
 **/
+
 public  virtual  bool
 IsCancelable {
     get { return  this.m_isCancelable; }
     set {
         this.m_isCancelable = value;
         raisePropertyChanged();
-        raiseCanExecuteChanged();
     }
 }
 
@@ -128,13 +128,13 @@ IsCancelable {
 /**
 **
 **/
+
 public  virtual  bool
 IsPausable {
     get { return  this.m_isPausable; }
     set {
         this.m_isPausable = value;
         raisePropertyChanged();
-        raiseCanExecuteChanged();
     }
 }
 
@@ -148,7 +148,6 @@ IsPaused {
     set {
         this.m_trgModel.IsPaused = value;
         raisePropertyChanged();
-        raiseCanExecuteChanged();
     }
 }
 
@@ -162,7 +161,6 @@ IsRunning {
     protected set {
         this.m_isRunning = value;
         raisePropertyChanged();
-        raiseCanExecuteChanged();
     }
 }
 
@@ -192,12 +190,6 @@ public  virtual  ICommand
 ResumeCommand {
     get { return  this.m_resumeCommand; }
 }
-
-//----------------------------------------------------------------
-/**
-**
-**/
-public  event PropertyChangedEventHandler?  PropertyChanged;
 
 
 //========================================================================
@@ -266,26 +258,16 @@ isResumeEnabled()
 /**
 **
 **/
-protected  virtual  void
-raiseCanExecuteChanged()
+
+protected  override  void
+checkCommandsCanExecute(
+        System.String?  propertyName)
 {
-    this.m_runTaskCommand.raiseCanExecuteChanged();
-    this.m_pauseCommand  .raiseCanExecuteChanged();
-    this.m_resumeCommand .raiseCanExecuteChanged();
+    base.raiseCanExecuteChanged(this.m_runTaskCommand);
+    base.raiseCanExecuteChanged(this.m_pauseCommand);
+    base.raiseCanExecuteChanged(this.m_resumeCommand);
 }
 
-//----------------------------------------------------------------
-/**
-**
-**/
-protected  virtual  void
-raisePropertyChanged(
-        [CallerMemberName]  System.String?  propertyName = null)
-{
-    PropertyChanged?.Invoke(
-            this, new PropertyChangedEventArgs(propertyName));
-    raiseCanExecuteChanged();
-}
 
 //----------------------------------------------------------------
 /**
