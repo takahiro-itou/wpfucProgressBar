@@ -26,14 +26,15 @@ public  partial  class  ProgressControl : UserControl
 //    Constructor(s) and Destructor.
 //
 
-    //----------------------------------------------------------------
-    /**   デフォルトコンストラクタ
-    **
-    **/
-    public  ProgressControl()
-    {
-        InitializeComponent();
-    }
+//----------------------------------------------------------------
+/**   デフォルトコンストラクタ
+**
+**/
+
+public  ProgressControl()
+{
+    InitializeComponent();
+}
 
 
 //========================================================================
@@ -41,18 +42,20 @@ public  partial  class  ProgressControl : UserControl
 //    外部に公開するプロパティ
 //
 
-    //----------------------------------------------------------------
-    /**   ViewModel プロパティ。
-    **
-    **/
-    public  IProgressViewModel?  ViewModel
-    {
-        get { return  this.m_viewModel; }
-        set {
-            this.m_viewModel = value;
-            this.DataContext = value;
-        }
+//----------------------------------------------------------------
+/**   ViewModel プロパティ。
+**
+**/
+
+public  IProgressViewModel?  ViewModel
+{
+    get { return  this.m_viewModel; }
+    set {
+        this.m_viewModel = value;
+        this.DataContext = value;
     }
+}
+
 
 //========================================================================
 //
@@ -74,8 +77,9 @@ public  partial  class  ProgressControl : UserControl
 //    Member Variables.
 //
 
-    /**   ビューモデル。    **/
-    private IProgressViewModel?     m_viewModel;
+/**   ビューモデル。    **/
+private     IProgressViewModel?     m_viewModel;
+
 
 }   //  End of class  ProgressControl
 

@@ -28,13 +28,14 @@ public  interface  IProgressModel<TResult, TProgVal>
 //    Public Member Functions.
 //
 
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    public  TResult
-    runTask(
-        IProgress<TProgVal> progress);
+//----------------------------------------------------------------
+/**
+**
+**/
+
+public  TResult
+runTask(
+    IProgress<TProgVal> progress);
 
 
 //========================================================================
@@ -42,19 +43,21 @@ public  interface  IProgressModel<TResult, TProgVal>
 //    Properties.
 //
 
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    public  TResult
-    CurrentValue { get; set; }
+//----------------------------------------------------------------
+/**
+**
+**/
 
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    public  bool
-    IsPaused { get; set; }
+public  TResult
+CurrentValue { get; set; }
+
+//----------------------------------------------------------------
+/**
+**
+**/
+
+public  bool
+IsPaused { get; set; }
 
 
 //========================================================================
