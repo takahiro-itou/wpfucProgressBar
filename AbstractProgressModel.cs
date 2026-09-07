@@ -1,4 +1,4 @@
-﻿//  -*-  coding: utf-8-with-signature-unix;        -*-  //
+﻿//  -*-  coding: utf-8-with-signature-unix     -*-  //
 /*************************************************************************
 **                                                                      **
 **                  ---  WPF UserControl Library.  ---                  **
@@ -20,10 +20,15 @@ namespace  WpfControl.Utils  {
 //    AbstractProgressViewModel  class.
 //
 
-public abstract class  AbstractProgressModel<TResult, TProgVal>
+public  abstract class  AbstractProgressModel<TResult, TProgVal>
         : IProgressModel<TResult, TProgVal>
     where TResult : struct
 {
+
+//========================================================================
+//
+//    Constructor(s) and Destructor.
+//
 
     //----------------------------------------------------------------
     /**   コンストラクタ。
@@ -94,6 +99,6 @@ public abstract class  AbstractProgressModel<TResult, TProgVal>
 
     private  bool       m_isPaused;
 
-}   //  End class AbstractProgressModel
+}   //  End of class  AbstractProgressModel
 
 }   //  End of namespace  WpfControl.Utils

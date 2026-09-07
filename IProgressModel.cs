@@ -1,4 +1,4 @@
-﻿//  -*-  coding: utf-8-with-signature-unix;        -*-  //
+﻿//  -*-  coding: utf-8-with-signature-unix     -*-  //
 /*************************************************************************
 **                                                                      **
 **                  ---  WPF UserControl Library.  ---                  **
@@ -63,6 +63,6 @@ public  interface  IProgressModel<TResult, TProgVal>
 //
 
 
-}   //  End interface IProgressModel
+}   //  End of interface  IProgressModel
 
 }   //  End of namespace  WpfControl.Utils

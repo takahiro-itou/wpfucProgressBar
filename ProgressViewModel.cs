@@ -1,4 +1,4 @@
-﻿//  -*-  coding: utf-8-with-signature  -*-  //
+﻿//  -*-  coding: utf-8-with-signature-unix     -*-  //
 /*************************************************************************
 **                                                                      **
 **                  ---  WPF UserControl Library.  ---                  **
@@ -12,11 +12,11 @@
 **                                                                      **
 *************************************************************************/
 
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
+using   System.ComponentModel;
+using   System.Runtime.CompilerServices;
+using   System.Windows.Input;
 
-using WpfControl.Common;
+using   WpfHelper.Commands
 
 
 namespace  WpfControl.Utils  {
@@ -25,11 +25,11 @@ namespace  WpfControl.Utils  {
 //
 //    ProgressViewModel  class.
 //
-//    このクラスは別リポジトリ WpfControlLibrary  にある
-//    Common.SimpleCommand  を利用します
+//    このクラスは別リポジトリ  WpfHelper にある
+//    抽象クラス ViewModels.ViewModelBase を利用します
 //
 
-public class  ProgressViewModel<TResult, TProgVal>
+public  class  ProgressViewModel<TResult, TProgVal>
         : INotifyPropertyChanged, IProgressViewModel
     where TResult  : struct
     where TProgVal : struct
@@ -317,6 +317,6 @@ private  bool       m_isCancelable  = false;
 private  bool       m_isPausable    = true;
 private  bool       m_isRunning     = false;
 
-}   //  End class ProgressViewModel
+}   //  End of class  ProgressViewModel
 
 }   //  End of namespace  WpfControl.Utils

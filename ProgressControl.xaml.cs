@@ -1,4 +1,4 @@
-﻿//  -*-  coding: utf-8-with-signature-unix;        -*-  //
+﻿//  -*-  coding: utf-8-with-signature-unix     -*-  //
 /*************************************************************************
 **                                                                      **
 **                  ---  WPF UserControl Library.  ---                  **
@@ -12,14 +12,19 @@
 **                                                                      **
 *************************************************************************/
 
-using System.ComponentModel;
-using System.Windows.Controls;
+using   System.ComponentModel;
+using   System.Windows.Controls;
 
 
 namespace  WpfControl.Utils  {
 
-public  partial class  ProgressControl : UserControl
+public  partial  class  ProgressControl : UserControl
 {
+
+//========================================================================
+//
+//    Constructor(s) and Destructor.
+//
 
     //----------------------------------------------------------------
     /**   デフォルトコンストラクタ
@@ -72,6 +77,6 @@ public  partial class  ProgressControl : UserControl
     /**   ビューモデル。    **/
     private IProgressViewModel?     m_viewModel;
 
-}   //  End class ProgressControl
+}   //  End of class  ProgressControl
 
 }   //  End of namespace  WpfControl.Sample

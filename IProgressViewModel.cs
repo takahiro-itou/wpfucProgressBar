@@ -1,4 +1,4 @@
-﻿//  -*-  coding: utf-8-with-signature-unix;        -*-  //
+﻿//  -*-  coding: utf-8-with-signature-unix     -*-  //
 /*************************************************************************
 **                                                                      **
 **                  ---  WPF UserControl Library.  ---                  **
@@ -12,7 +12,7 @@
 **                                                                      **
 *************************************************************************/
 
-using System.Windows.Input;
+using   System.Windows.Input;
 
 
 namespace  WpfControl.Utils  {
@@ -61,6 +61,6 @@ public  interface  IProgressViewModel
     ResumeCommand { get; }
 
 
-}   //  End interface IProgressViewModel
+}   //  End of interface  IProgressViewModel
 
 }   //  End of namespace  WpfControl.Utils
