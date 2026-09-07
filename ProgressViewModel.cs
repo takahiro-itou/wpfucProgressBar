@@ -52,11 +52,11 @@ ProgressViewModel(
     this.m_progress = new Progress<TProgVal>(updateProgress);
     this.m_trgModel = model;
 
-    this.m_runTaskCommand = new SimpleCommand<int>(
+    this.ModelTaskCommand   = new SimpleCommand<int>(
             param => runModelTask(param), _ => ! IsRunning );
-    this.m_pauseCommand   = new SimpleCommand<int>(
+    this.PauseCommand   = new SimpleCommand<int>(
             param => pauseTask(param),  _ => isPauseEnabled() );
-    this.m_resumeCommand  = new SimpleCommand<int>(
+    this.ResumeCommand  = new SimpleCommand<int>(
             param => resumeTask(param), _ => isResumeEnabled());
 }
 
@@ -142,6 +142,7 @@ IsPausable {
 /**
 **
 **/
+
 public  virtual  bool
 IsPaused {
     get { return  this.m_trgModel.IsPaused; }
@@ -155,6 +156,7 @@ IsPaused {
 /**
 **
 **/
+
 public  virtual  bool
 IsRunning {
     get { return  this.m_isRunning; }
@@ -164,32 +166,14 @@ IsRunning {
     }
 }
 
-//----------------------------------------------------------------
-/**   タスクを実行するコマンドを取得するプロパティ
-**
-**/
-public  virtual  ICommand
-ModelTaskCommand {
-    get { return  this.m_runTaskCommand; }
-}
+/**   タスクを実行するコマンドを取得するプロパティ  **/
+public  virtual  ICommand  ModelTaskCommand  { get; }
 
-//----------------------------------------------------------------
-/**   ポーズ用のコマンドを取得するプロパティ
-**
-**/
-public  virtual  ICommand
-PauseCommand {
-    get { return  this.m_pauseCommand; }
-}
+/**   ポーズ用のコマンドを取得するプロパティ        **/
+public  virtual  ICommand  PauseCommand  { get; }
 
-//----------------------------------------------------------------
-/**   リジューム用のコマンドを取得するプロパティ
-**
-**/
-public  virtual  ICommand
-ResumeCommand {
-    get { return  this.m_resumeCommand; }
-}
+/**   リジューム用のコマンドを取得するプロパティ    **/
+public  virtual  ICommand  ResumeCommand  { get; }
 
 
 //========================================================================
@@ -263,9 +247,9 @@ protected  override  void
 checkCommandsCanExecute(
         System.String?  propertyName)
 {
-    base.raiseCanExecuteChanged(this.m_runTaskCommand);
-    base.raiseCanExecuteChanged(this.m_pauseCommand);
-    base.raiseCanExecuteChanged(this.m_resumeCommand);
+    base.raiseCanExecuteChanged(this.ModelTaskCommand);
+    base.raiseCanExecuteChanged(this.PauseCommand);
+    base.raiseCanExecuteChanged(this.ResumeCommand);
 }
 
 
@@ -286,19 +270,16 @@ updateProgress(TProgVal progressValue)
 //    Member Variables.
 //
 
-private  readonly   IProgress<TProgVal>     m_progress;
-private  readonly   IProgressModel<TResult, TProgVal>   m_trgModel;
+private   readonly  IProgress<TProgVal>     m_progress;
+private   readonly  IProgressModel<TResult, TProgVal>   m_trgModel;
 
-private  readonly   SimpleCommand<int>  m_runTaskCommand;
-private  readonly   SimpleCommand<int>  m_pauseCommand;
-private  readonly   SimpleCommand<int>  m_resumeCommand;
+private   TProgVal  m_progressValue = default(TProgVal);
+private   TResult   m_resultValue;
 
-private  TProgVal   m_progressValue = default(TProgVal);
-private  TResult    m_resultValue;
+private   bool      m_isCancelable  = false;
+private   bool      m_isPausable    = true;
+private   bool      m_isRunning     = false;
 
-private  bool       m_isCancelable  = false;
-private  bool       m_isPausable    = true;
-private  bool       m_isRunning     = false;
 
 }   //  End of class  ProgressViewModel
 
