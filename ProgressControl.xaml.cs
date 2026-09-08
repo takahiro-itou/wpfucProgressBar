@@ -1,4 +1,4 @@
-﻿//  -*-  coding: utf-8-with-signature-unix;        -*-  //
+﻿//  -*-  coding: utf-8-with-signature-unix     -*-  //
 /*************************************************************************
 **                                                                      **
 **                  ---  WPF UserControl Library.  ---                  **
@@ -12,23 +12,29 @@
 **                                                                      **
 *************************************************************************/
 
-using System.ComponentModel;
-using System.Windows.Controls;
+using   System.ComponentModel;
+using   System.Windows.Controls;
 
 
 namespace  WpfControl.Utils  {
 
-public  partial class  ProgressControl : UserControl
+public  partial  class  ProgressControl : UserControl
 {
 
-    //----------------------------------------------------------------
-    /**   デフォルトコンストラクタ
-    **
-    **/
-    public  ProgressControl()
-    {
-        InitializeComponent();
-    }
+//========================================================================
+//
+//    Constructor(s) and Destructor.
+//
+
+//----------------------------------------------------------------
+/**   デフォルトコンストラクタ
+**
+**/
+
+public  ProgressControl()
+{
+    InitializeComponent();
+}
 
 
 //========================================================================
@@ -36,18 +42,20 @@ public  partial class  ProgressControl : UserControl
 //    外部に公開するプロパティ
 //
 
-    //----------------------------------------------------------------
-    /**   ViewModel プロパティ。
-    **
-    **/
-    public  IProgressViewModel?  ViewModel
-    {
-        get { return  this.m_viewModel; }
-        set {
-            this.m_viewModel = value;
-            this.DataContext = value;
-        }
+//----------------------------------------------------------------
+/**   ViewModel プロパティ。
+**
+**/
+
+public  IProgressViewModel?  ViewModel
+{
+    get { return  this.m_viewModel; }
+    set {
+        this.m_viewModel = value;
+        this.DataContext = value;
     }
+}
+
 
 //========================================================================
 //
@@ -69,9 +77,10 @@ public  partial class  ProgressControl : UserControl
 //    Member Variables.
 //
 
-    /**   ビューモデル。    **/
-    private IProgressViewModel?     m_viewModel;
+/**   ビューモデル。    **/
+private     IProgressViewModel?     m_viewModel;
 
-}   //  End class ProgressControl
+
+}   //  End of class  ProgressControl
 
 }   //  End of namespace  WpfControl.Sample

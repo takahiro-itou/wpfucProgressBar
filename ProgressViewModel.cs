@@ -1,4 +1,4 @@
-﻿//  -*-  coding: utf-8-with-signature  -*-  //
+﻿//  -*-  coding: utf-8-with-signature-unix     -*-  //
 /*************************************************************************
 **                                                                      **
 **                  ---  WPF UserControl Library.  ---                  **
@@ -12,11 +12,12 @@
 **                                                                      **
 *************************************************************************/
 
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
+using   System.ComponentModel;
+using   System.Runtime.CompilerServices;
+using   System.Windows.Input;
 
-using WpfControl.Common;
+using   WpfHelper.Commands;
+using   WpfHelper.ViewModels;
 
 
 namespace  WpfControl.Utils  {
@@ -25,12 +26,12 @@ namespace  WpfControl.Utils  {
 //
 //    ProgressViewModel  class.
 //
-//    このクラスは別リポジトリ WpfControlLibrary  にある
-//    Common.SimpleCommand  を利用します
+//    このクラスは別リポジトリ  WpfHelper にある
+//    抽象クラス ViewModels.ViewModelBase を利用します
 //
 
-public class  ProgressViewModel<TResult, TProgVal>
-        : INotifyPropertyChanged, IProgressViewModel
+public  class  ProgressViewModel<TResult, TProgVal>
+        : ViewModelBase, IProgressViewModel
     where TResult  : struct
     where TProgVal : struct
 {
@@ -51,11 +52,11 @@ ProgressViewModel(
     this.m_progress = new Progress<TProgVal>(updateProgress);
     this.m_trgModel = model;
 
-    this.m_runTaskCommand = new SimpleCommand<int>(
+    this.ModelTaskCommand   = new SimpleCommand<int>(
             param => runModelTask(param), _ => ! IsRunning );
-    this.m_pauseCommand   = new SimpleCommand<int>(
+    this.PauseCommand   = new SimpleCommand<int>(
             param => pauseTask(param),  _ => isPauseEnabled() );
-    this.m_resumeCommand  = new SimpleCommand<int>(
+    this.ResumeCommand  = new SimpleCommand<int>(
             param => resumeTask(param), _ => isResumeEnabled());
 }
 
@@ -113,13 +114,13 @@ runModelTask(int param)
 /**
 **
 **/
+
 public  virtual  bool
 IsCancelable {
     get { return  this.m_isCancelable; }
     set {
         this.m_isCancelable = value;
         raisePropertyChanged();
-        raiseCanExecuteChanged();
     }
 }
 
@@ -127,13 +128,13 @@ IsCancelable {
 /**
 **
 **/
+
 public  virtual  bool
 IsPausable {
     get { return  this.m_isPausable; }
     set {
         this.m_isPausable = value;
         raisePropertyChanged();
-        raiseCanExecuteChanged();
     }
 }
 
@@ -141,13 +142,13 @@ IsPausable {
 /**
 **
 **/
+
 public  virtual  bool
 IsPaused {
     get { return  this.m_trgModel.IsPaused; }
     set {
         this.m_trgModel.IsPaused = value;
         raisePropertyChanged();
-        raiseCanExecuteChanged();
     }
 }
 
@@ -155,48 +156,24 @@ IsPaused {
 /**
 **
 **/
+
 public  virtual  bool
 IsRunning {
     get { return  this.m_isRunning; }
     protected set {
         this.m_isRunning = value;
         raisePropertyChanged();
-        raiseCanExecuteChanged();
     }
 }
 
-//----------------------------------------------------------------
-/**   タスクを実行するコマンドを取得するプロパティ
-**
-**/
-public  virtual  ICommand
-ModelTaskCommand {
-    get { return  this.m_runTaskCommand; }
-}
+/**   タスクを実行するコマンドを取得するプロパティ  **/
+public  virtual  ICommand  ModelTaskCommand  { get; }
 
-//----------------------------------------------------------------
-/**   ポーズ用のコマンドを取得するプロパティ
-**
-**/
-public  virtual  ICommand
-PauseCommand {
-    get { return  this.m_pauseCommand; }
-}
+/**   ポーズ用のコマンドを取得するプロパティ        **/
+public  virtual  ICommand  PauseCommand  { get; }
 
-//----------------------------------------------------------------
-/**   リジューム用のコマンドを取得するプロパティ
-**
-**/
-public  virtual  ICommand
-ResumeCommand {
-    get { return  this.m_resumeCommand; }
-}
-
-//----------------------------------------------------------------
-/**
-**
-**/
-public  event PropertyChangedEventHandler?  PropertyChanged;
+/**   リジューム用のコマンドを取得するプロパティ    **/
+public  virtual  ICommand  ResumeCommand  { get; }
 
 
 //========================================================================
@@ -265,26 +242,16 @@ isResumeEnabled()
 /**
 **
 **/
-protected  virtual  void
-raiseCanExecuteChanged()
+
+protected  override  void
+checkCommandsCanExecute(
+        System.String?  propertyName)
 {
-    this.m_runTaskCommand.raiseCanExecuteChanged();
-    this.m_pauseCommand  .raiseCanExecuteChanged();
-    this.m_resumeCommand .raiseCanExecuteChanged();
+    base.raiseCanExecuteChanged(this.ModelTaskCommand);
+    base.raiseCanExecuteChanged(this.PauseCommand);
+    base.raiseCanExecuteChanged(this.ResumeCommand);
 }
 
-//----------------------------------------------------------------
-/**
-**
-**/
-protected  virtual  void
-raisePropertyChanged(
-        [CallerMemberName]  System.String?  propertyName = null)
-{
-    PropertyChanged?.Invoke(
-            this, new PropertyChangedEventArgs(propertyName));
-    raiseCanExecuteChanged();
-}
 
 //----------------------------------------------------------------
 /**
@@ -303,20 +270,17 @@ updateProgress(TProgVal progressValue)
 //    Member Variables.
 //
 
-private  readonly   IProgress<TProgVal>     m_progress;
-private  readonly   IProgressModel<TResult, TProgVal>   m_trgModel;
+private   readonly  IProgress<TProgVal>     m_progress;
+private   readonly  IProgressModel<TResult, TProgVal>   m_trgModel;
 
-private  readonly   SimpleCommand<int>  m_runTaskCommand;
-private  readonly   SimpleCommand<int>  m_pauseCommand;
-private  readonly   SimpleCommand<int>  m_resumeCommand;
+private   TProgVal  m_progressValue = default(TProgVal);
+private   TResult   m_resultValue;
 
-private  TProgVal   m_progressValue = default(TProgVal);
-private  TResult    m_resultValue;
+private   bool      m_isCancelable  = false;
+private   bool      m_isPausable    = true;
+private   bool      m_isRunning     = false;
 
-private  bool       m_isCancelable  = false;
-private  bool       m_isPausable    = true;
-private  bool       m_isRunning     = false;
 
-}   //  End class ProgressViewModel
+}   //  End of class  ProgressViewModel
 
 }   //  End of namespace  WpfControl.Utils

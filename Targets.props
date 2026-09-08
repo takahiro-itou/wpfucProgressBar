@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AbstractProgressModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IProgressModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IProgressViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ProgressControl.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ProgressViewModel.cs" />
+  </ItemGroup>
+
+</Project>

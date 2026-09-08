@@ -1,4 +1,4 @@
-﻿//  -*-  coding: utf-8-with-signature-unix;        -*-  //
+﻿//  -*-  coding: utf-8-with-signature-unix     -*-  //
 /*************************************************************************
 **                                                                      **
 **                  ---  WPF UserControl Library.  ---                  **
@@ -20,19 +20,25 @@ namespace  WpfControl.Utils  {
 //    AbstractProgressViewModel  class.
 //
 
-public abstract class  AbstractProgressModel<TResult, TProgVal>
+public  abstract class  AbstractProgressModel<TResult, TProgVal>
         : IProgressModel<TResult, TProgVal>
     where TResult : struct
 {
 
-    //----------------------------------------------------------------
-    /**   コンストラクタ。
-    **
-    **/
-    public
-    AbstractProgressModel()
-    {
-    }
+//========================================================================
+//
+//    Constructor(s) and Destructor.
+//
+
+//----------------------------------------------------------------
+/**   コンストラクタ。
+**
+**/
+
+public
+AbstractProgressModel()
+{
+}
 
 
 //========================================================================
@@ -40,13 +46,14 @@ public abstract class  AbstractProgressModel<TResult, TProgVal>
 //    Public Member Functions.
 //
 
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    public  abstract  TResult
-    runTask(
-        IProgress<TProgVal> progress);
+//----------------------------------------------------------------
+/**
+**
+**/
+
+public  abstract  TResult
+runTask(
+    IProgress<TProgVal> progress);
 
 
 //========================================================================
@@ -54,25 +61,27 @@ public abstract class  AbstractProgressModel<TResult, TProgVal>
 //    Properties.
 //
 
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    public  TResult
-    CurrentValue {
-        get { return  this.m_curValue; }
-        set { this.m_curValue = value; }
-    }
+//----------------------------------------------------------------
+/**
+**
+**/
 
-    //----------------------------------------------------------------
-    /**
-    **
-    **/
-    public  bool
-    IsPaused {
-        get { return  this.m_isPaused; }
-        set { this.m_isPaused = value; }
-    }
+public  TResult
+CurrentValue {
+    get { return  this.m_curValue; }
+    set { this.m_curValue = value; }
+}
+
+//----------------------------------------------------------------
+/**
+**
+**/
+
+public  bool
+IsPaused {
+    get { return  this.m_isPaused; }
+    set { this.m_isPaused = value; }
+}
 
 
 //========================================================================
@@ -90,10 +99,11 @@ public abstract class  AbstractProgressModel<TResult, TProgVal>
 //    Member Variables.
 //
 
-    private  TResult    m_curValue;
+private  TResult    m_curValue;
 
-    private  bool       m_isPaused;
+private  bool       m_isPaused;
 
-}   //  End class AbstractProgressModel
+
+}   //  End of class  AbstractProgressModel
 
 }   //  End of namespace  WpfControl.Utils
