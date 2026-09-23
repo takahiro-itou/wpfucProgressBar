@@ -49,15 +49,15 @@ public
 ProgressViewModel(
         IProgressModel<TResult, TProgVal>   model)
 {
-    this.m_progress = new Progress<TProgVal>(updateProgress);
+    this.m_progress = new Progress<TProgVal>(UpdateProgress);
     this.m_trgModel = model;
 
     this.ModelTaskCommand   = new SimpleCommand<int>(
-            param => runModelTask(param), _ => ! IsRunning );
+            param => RunModelTask(param), _ => ! IsRunning );
     this.PauseCommand   = new SimpleCommand<int>(
-            param => pauseTask(param),  _ => isPauseEnabled() );
+            param => PauseTask(param),  _ => IsPauseEnabled() );
     this.ResumeCommand  = new SimpleCommand<int>(
-            param => resumeTask(param), _ => isResumeEnabled());
+            param => ResumeTask(param), _ => IsResumeEnabled());
 }
 
 
@@ -71,7 +71,7 @@ ProgressViewModel(
 **
 **/
 public  async  void
-pauseTask(int param)
+PauseTask(int param)
 {
     await  System.Threading.Tasks.Task.Delay(param);
 
@@ -79,7 +79,7 @@ pauseTask(int param)
 }
 
 public  async  void
-resumeTask(int param)
+ResumeTask(int param)
 {
     await  System.Threading.Tasks.Task.Delay(param);
 
@@ -91,13 +91,13 @@ resumeTask(int param)
 **
 **/
 public  async  void
-runModelTask(int param)
+RunModelTask(int param)
 {
     this.IsRunning = true;
     await  System.Threading.Tasks.Task.Delay(param);
 
     Task<TResult>  task = Task.Run<TResult>(
-        () => this.m_trgModel.runTask(this.m_progress));
+        () => this.m_trgModel.RunTask(this.m_progress));
     TResult  result = await task;
 
     this.IsRunning = false;
@@ -120,7 +120,7 @@ IsCancelable {
     get { return  this.m_isCancelable; }
     set {
         this.m_isCancelable = value;
-        raisePropertyChanged();
+        RaisePropertyChanged();
     }
 }
 
@@ -134,7 +134,7 @@ IsPausable {
     get { return  this.m_isPausable; }
     set {
         this.m_isPausable = value;
-        raisePropertyChanged();
+        RaisePropertyChanged();
     }
 }
 
@@ -148,7 +148,7 @@ IsPaused {
     get { return  this.m_trgModel.IsPaused; }
     set {
         this.m_trgModel.IsPaused = value;
-        raisePropertyChanged();
+        RaisePropertyChanged();
     }
 }
 
@@ -162,7 +162,7 @@ IsRunning {
     get { return  this.m_isRunning; }
     protected set {
         this.m_isRunning = value;
-        raisePropertyChanged();
+        RaisePropertyChanged();
     }
 }
 
@@ -190,7 +190,7 @@ ProgressValue
 {
     get { return  this.m_progressValue; }
     set { this.m_progressValue = value;
-          raisePropertyChanged();
+          RaisePropertyChanged();
     }
 }
 
@@ -203,7 +203,7 @@ ResultValue
 {
     get { return  this.m_resultValue; }
     set { this.m_resultValue = value;
-          raisePropertyChanged();
+          RaisePropertyChanged();
     }
 }
 
@@ -223,7 +223,7 @@ ResultValue
 **
 **/
 protected  virtual  bool
-isPauseEnabled()
+IsPauseEnabled()
 {
     return ( this.IsPausable && this.IsRunning && (! IsPaused) );
 }
@@ -233,7 +233,7 @@ isPauseEnabled()
 **
 **/
 protected  virtual  bool
-isResumeEnabled()
+IsResumeEnabled()
 {
     return ( this.IsPausable && this.IsRunning && IsPaused );
 }
@@ -244,12 +244,12 @@ isResumeEnabled()
 **/
 
 protected  override  void
-checkCommandsCanExecute(
+CheckCommandsCanExecute(
         System.String?  propertyName)
 {
-    base.raiseCanExecuteChanged(this.ModelTaskCommand);
-    base.raiseCanExecuteChanged(this.PauseCommand);
-    base.raiseCanExecuteChanged(this.ResumeCommand);
+    RaiseCanExecuteChanged(this.ModelTaskCommand);
+    RaiseCanExecuteChanged(this.PauseCommand);
+    RaiseCanExecuteChanged(this.ResumeCommand);
 }
 
 
@@ -258,7 +258,7 @@ checkCommandsCanExecute(
 **
 **/
 protected  virtual  void
-updateProgress(TProgVal progressValue)
+UpdateProgress(TProgVal progressValue)
 {
     this.ResultValue    = this.m_trgModel.CurrentValue;
     this.ProgressValue  = progressValue;

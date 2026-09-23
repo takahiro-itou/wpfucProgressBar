@@ -52,7 +52,7 @@ AbstractProgressModel()
 **/
 
 public  abstract  TResult
-runTask(
+RunTask(
     IProgress<TProgVal> progress);
 
 
