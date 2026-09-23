@@ -97,7 +97,7 @@ RunModelTask(int param)
     await  System.Threading.Tasks.Task.Delay(param);
 
     Task<TResult>  task = Task.Run<TResult>(
-        () => this.m_trgModel.runTask(this.m_progress));
+        () => this.m_trgModel.RunTask(this.m_progress));
     TResult  result = await task;
 
     this.IsRunning = false;
