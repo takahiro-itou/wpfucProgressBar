@@ -49,15 +49,15 @@ public
 ProgressViewModel(
         IProgressModel<TResult, TProgVal>   model)
 {
-    this.m_progress = new Progress<TProgVal>(updateProgress);
+    this.m_progress = new Progress<TProgVal>(UpdateProgress);
     this.m_trgModel = model;
 
     this.ModelTaskCommand   = new SimpleCommand<int>(
-            param => runModelTask(param), _ => ! IsRunning );
+            param => RunModelTask(param), _ => ! IsRunning );
     this.PauseCommand   = new SimpleCommand<int>(
-            param => pauseTask(param),  _ => isPauseEnabled() );
+            param => PauseTask(param),  _ => IsPauseEnabled() );
     this.ResumeCommand  = new SimpleCommand<int>(
-            param => resumeTask(param), _ => isResumeEnabled());
+            param => ResumeTask(param), _ => IsResumeEnabled());
 }
 
 
@@ -71,7 +71,7 @@ ProgressViewModel(
 **
 **/
 public  async  void
-pauseTask(int param)
+PauseTask(int param)
 {
     await  System.Threading.Tasks.Task.Delay(param);
 
@@ -79,7 +79,7 @@ pauseTask(int param)
 }
 
 public  async  void
-resumeTask(int param)
+ResumeTask(int param)
 {
     await  System.Threading.Tasks.Task.Delay(param);
 
@@ -91,7 +91,7 @@ resumeTask(int param)
 **
 **/
 public  async  void
-runModelTask(int param)
+RunModelTask(int param)
 {
     this.IsRunning = true;
     await  System.Threading.Tasks.Task.Delay(param);
@@ -223,7 +223,7 @@ ResultValue
 **
 **/
 protected  virtual  bool
-isPauseEnabled()
+IsPauseEnabled()
 {
     return ( this.IsPausable && this.IsRunning && (! IsPaused) );
 }
@@ -233,7 +233,7 @@ isPauseEnabled()
 **
 **/
 protected  virtual  bool
-isResumeEnabled()
+IsResumeEnabled()
 {
     return ( this.IsPausable && this.IsRunning && IsPaused );
 }
@@ -244,7 +244,7 @@ isResumeEnabled()
 **/
 
 protected  override  void
-checkCommandsCanExecute(
+CheckCommandsCanExecute(
         System.String?  propertyName)
 {
     base.raiseCanExecuteChanged(this.ModelTaskCommand);
@@ -258,7 +258,7 @@ checkCommandsCanExecute(
 **
 **/
 protected  virtual  void
-updateProgress(TProgVal progressValue)
+UpdateProgress(TProgVal progressValue)
 {
     this.ResultValue    = this.m_trgModel.CurrentValue;
     this.ProgressValue  = progressValue;
