@@ -120,7 +120,7 @@ IsCancelable {
     get { return  this.m_isCancelable; }
     set {
         this.m_isCancelable = value;
-        raisePropertyChanged();
+        RaisePropertyChanged();
     }
 }
 
@@ -134,7 +134,7 @@ IsPausable {
     get { return  this.m_isPausable; }
     set {
         this.m_isPausable = value;
-        raisePropertyChanged();
+        RaisePropertyChanged();
     }
 }
 
@@ -148,7 +148,7 @@ IsPaused {
     get { return  this.m_trgModel.IsPaused; }
     set {
         this.m_trgModel.IsPaused = value;
-        raisePropertyChanged();
+        RaisePropertyChanged();
     }
 }
 
@@ -162,7 +162,7 @@ IsRunning {
     get { return  this.m_isRunning; }
     protected set {
         this.m_isRunning = value;
-        raisePropertyChanged();
+        RaisePropertyChanged();
     }
 }
 
@@ -190,7 +190,7 @@ ProgressValue
 {
     get { return  this.m_progressValue; }
     set { this.m_progressValue = value;
-          raisePropertyChanged();
+          RaisePropertyChanged();
     }
 }
 
@@ -203,7 +203,7 @@ ResultValue
 {
     get { return  this.m_resultValue; }
     set { this.m_resultValue = value;
-          raisePropertyChanged();
+          RaisePropertyChanged();
     }
 }
 
@@ -247,9 +247,9 @@ protected  override  void
 CheckCommandsCanExecute(
         System.String?  propertyName)
 {
-    base.raiseCanExecuteChanged(this.ModelTaskCommand);
-    base.raiseCanExecuteChanged(this.PauseCommand);
-    base.raiseCanExecuteChanged(this.ResumeCommand);
+    RaiseCanExecuteChanged(this.ModelTaskCommand);
+    RaiseCanExecuteChanged(this.PauseCommand);
+    RaiseCanExecuteChanged(this.ResumeCommand);
 }
 
 
